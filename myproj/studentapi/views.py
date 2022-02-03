@@ -1,21 +1,11 @@
+import pydoc
 from django.shortcuts import render
 from django.http import HttpResponse
-# from django.shortcuts import get_object_or_404
-# from rest_framework.views import APIView
-# from rest_framework.response import Response
-# from rest_framework import  status
 from .models import *
-# from .serializers import studentSerializer
-# # Create your views here.
-# class StudentList(APIView):
-#     def get(self, request):
-#         students=student.objects.all()
-#         serializer=studentSerializer(students, many=True)
-#         return Response(serializer.data)
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import StudentSerializer
-from .models import Student
+from .serializers import StudentSerializer,StudentDetailsSerializer,AssignmentSerializer
+from .models import Student,StudentDetails,Assignment
 @api_view(['GET','POST','PUT','DELETE'])
 def StudentList(request,key=None):
     id=key
@@ -48,7 +38,7 @@ def index(request):
     return render(request,'signup.html')
 #getting data from form
 def newPage(request):
-    f_name=request.POST.get('fname')
+    f_name = request.POST.get('fname')
     l_name = request.POST.get('lastname')
     mail = request.POST.get('email')
     mobile = request.POST.get('mobileno')
@@ -60,6 +50,48 @@ def newPage(request):
     ref.save()
     return render(request, 'signup.html',{"message":'registered'})
 
+@api_view(['GET'])
+def get_student_details(request):
+    if request.method=="GET":
+        student_id=request.GET.get('student_id',None)
+        gender=request.GET.get('gender',None)
+        if student_id is None:
+            if gender is not None:
+                if gender=="Male":
+                    all_students=StudentDetails.objects.filter(gender='Male')
+                    serializer=StudentDetailsSerializer(all_students,many=True)
+                    return Response(serializer.data)
+                elif gender=="Female":
+                    all_students=StudentDetails.objects.filter(gender='Female')
+                    serializer=StudentDetailsSerializer(all_students,many=True)
+                    return Response(serializer.data)
+            else:
+                all_students=StudentDetails.objects.all()
+                serializer=StudentDetailsSerializer(all_students,many=True)
+                return Response(serializer.data)
+        else:
+            if gender is None:
+                all_students = StudentDetails.objects.get(id=student_id)
+                serializer = StudentDetailsSerializer(all_students)
+                return Response(serializer.data)
+            else:
+                return Response({"Invalid"})
+
+
+
+
+
+def assign(request):
+
+    return render(request,'p.html'  )
+def assignment(request):
+    # if request.method=="POST":
+        subject=request.POST.get('subject')
+        assignment_num=request.POST.get('assignment_num')
+        # file=( request.FILES['file'])
+        re=Assignment(subject=subject,  assignment_num= assignment_num)
+        re.save()
+        return render(request,'p.html',{"message":'done'})
 
 
 

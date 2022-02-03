@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/all.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+    <div class="header1">
+        <h1> Assignment Portal</h1>
+        <h2>Submit your Assignment here.</h2>
+    </div>
+        <form action="/assignment/" method="post" >
+
+            <div class="filedrop">
+                <h2>Drag and drop the files</h2>
+                <i class="fas fa-file-upload" name="file" ></i>
+<!--                <input type="hidden" id="file" name="pic">-->
+            </div>
+            <div class="footer">
+                  {% csrf_token %}
+                <label for="subject" >Subject:</label>
+                    <input type="text" id="subject" name="subject">
+
+                <label for="assignment_num" >Assignment No:</label>
+                <input type="number" id="assignment_num" name="assignment_num">
+                    <input type="submit" >
+        </form>
+
+    </div>
+    </div>
+     <h2 align="center">
+         {% if message %}
+            {{ message }}
+         {% else %}
+            <p>Please fill form</p>
+         {% endif %}
+        </h2>
+    <script src="{% static 'js/p.js' %}"></script>
+</body>
+</html>
