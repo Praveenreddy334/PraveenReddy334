@@ -1,0 +1,66 @@
+.header{
+    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+    
+}
+.header1{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+    width: 50%;
+    left: 180px;
+}
+.footer{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5px;
+    width: 30%;
+    left: 270px;
+    top:400px;
+}
+.filedrop{
+    display: flex;
+    position: absolute;
+    width: 70%;
+    height: 30vh;
+    border: 10px solid black;
+    top:130px;
+    left: 100px;
+    margin-top: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+i{
+    font-size: 50px;
+}
+.border-success{
+    border-color: green;
+}
+.container{
+    display: flex;
+    position: relative;
+    border: 1px solid blue;
+    width:50%;
+    height: 80vh;
+    /* margin-left: 350px;
+    margin-top: 20px; */
+    top: 0px;
+    left: 400px;
+
+}
+.left-container{
+    border: 1px solid red;
+    width:20%;
+    height: 80vh;
+}
+body{
+    background-image: url("Images/back.jpg");
+    background-size: cover;
+}
